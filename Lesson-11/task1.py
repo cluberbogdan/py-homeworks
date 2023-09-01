@@ -1,6 +1,9 @@
 
 import requests
 
+with open('config.txt', 'r') as file:
+    api_key = file.read()
+
 def search_gif(search_term):
     
     api_key = 'gOoqPUNQINVpuioUVdzWyCesJWPeV4fk'
