@@ -22,8 +22,7 @@ CREATE TABLE `reservations` (
   `room_id` int,
   `max_residence` int,
   `check_in_date` date,
-  `check_out_date` date,
-  `total_price` decimal
+  `check_out_date` date
 );
 
 CREATE TABLE `reviews` (
@@ -31,17 +30,17 @@ CREATE TABLE `reviews` (
   `reservation_id` int,
   `rating` int,
   `review_text` text,
-  `review_date` date,
-  `total_price` decimal
+  `review_date` date
 );
 
-CREATE TABLE `paymentTransactions` (
+CREATE TABLE `payment` (
   `transaction_id` int PRIMARY KEY,
   `guest_id` int,
   `room_id` int,
   `payment_date` date,
   `total_price` decimal,
-  `payment_status` varchar(255)
+  `payment_status` varchar(255),
+  `reservation_id` int
 );
 
 CREATE TABLE `hostReviews` (
@@ -54,14 +53,19 @@ CREATE TABLE `hostReviews` (
 
 ALTER TABLE `users` ADD FOREIGN KEY (`user_id`) REFERENCES `rooms` (`host_id`);
 
-ALTER TABLE `users` ADD FOREIGN KEY (`user_id`) REFERENCES `reservations` (`guest_id`);
+CREATE TABLE `reservations_users` (
+  `reservations_guest_id` int,
+  `users_user_id` int,
+  PRIMARY KEY (`reservations_guest_id`, `users_user_id`)
+);
 
-ALTER TABLE `rooms` ADD FOREIGN KEY (`room_id`) REFERENCES `reservations` (`room_id`);
+ALTER TABLE `reservations_users` ADD FOREIGN KEY (`reservations_guest_id`) REFERENCES `reservations` (`guest_id`);
+
+ALTER TABLE `reservations_users` ADD FOREIGN KEY (`users_user_id`) REFERENCES `users` (`user_id`);
+
+
+ALTER TABLE `reservations` ADD FOREIGN KEY (`reservation_id`) REFERENCES `payment` (`reservation_id`);
 
 ALTER TABLE `reservations` ADD FOREIGN KEY (`reservation_id`) REFERENCES `reviews` (`reservation_id`);
 
-ALTER TABLE `users` ADD FOREIGN KEY (`user_id`) REFERENCES `hostReviews` (`guest_id`);
-
-ALTER TABLE `users` ADD FOREIGN KEY (`user_id`) REFERENCES `paymentTransactions` (`guest_id`);
-
-ALTER TABLE `rooms` ADD FOREIGN KEY (`room_id`) REFERENCES `paymentTransactions` (`room_id`);
+ALTER TABLE `reservations` ADD FOREIGN KEY (`guest_id`) REFERENCES `hostReviews` (`guest_id`);
