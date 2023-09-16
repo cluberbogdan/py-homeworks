@@ -35,8 +35,6 @@ CREATE TABLE `reviews` (
 
 CREATE TABLE `payment` (
   `transaction_id` int PRIMARY KEY,
-  `guest_id` int,
-  `room_id` int,
   `payment_date` date,
   `total_price` decimal,
   `payment_status` varchar(255),
@@ -45,6 +43,7 @@ CREATE TABLE `payment` (
 
 CREATE TABLE `hostReviews` (
   `host_review_id` int PRIMARY KEY,
+  `reservation_id` int,
   `guest_id` int,
   `host_id` int,
   `review_text` text,
@@ -68,4 +67,4 @@ ALTER TABLE `reservations` ADD FOREIGN KEY (`reservation_id`) REFERENCES `paymen
 
 ALTER TABLE `reservations` ADD FOREIGN KEY (`reservation_id`) REFERENCES `reviews` (`reservation_id`);
 
-ALTER TABLE `reservations` ADD FOREIGN KEY (`guest_id`) REFERENCES `hostReviews` (`guest_id`);
+ALTER TABLE `reservations` ADD FOREIGN KEY (`reservation_id`) REFERENCES `hostReviews` (`reservation_id`);
