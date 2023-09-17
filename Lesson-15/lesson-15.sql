@@ -52,6 +52,8 @@ CREATE TABLE `hostReviews` (
 
 ALTER TABLE `users` ADD FOREIGN KEY (`user_id`) REFERENCES `rooms` (`host_id`);
 
+ALTER TABLE `reservations` ADD FOREIGN KEY (`room_id`) REFERENCES `rooms` (`room_id`);
+
 CREATE TABLE `reservations_users` (
   `reservations_guest_id` int,
   `users_user_id` int,
