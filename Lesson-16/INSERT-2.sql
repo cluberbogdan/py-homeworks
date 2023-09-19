@@ -2,9 +2,9 @@ INSERT INTO "users" ("username", "email", "password_hash", "user_type")
 VALUES ('user1', 'user1@example.com', 'hashed_password1', 'guest'),
        ('user2', 'user2@example.com', 'hashed_password2', 'host'),
        ('user3', 'user3@example.com', 'hashed_password3', 'guest'),
-       ('user4', 'user3@example.com', 'hashed_password3', 'guest'),
-       ('user5', 'user3@example.com', 'hashed_password3', 'host'),
-       ('user6', 'user3@example.com', 'hashed_password3', 'guest');
+       ('user4', 'user3@example.com', 'hashed_password4', 'guest'),
+       ('user5', 'user3@example.com', 'hashed_password5', 'host'),
+       ('user6', 'user3@example.com', 'hashed_password6', 'guest');
 
 INSERT INTO "rooms" ("host_id", "room_name", "max_residents", "price_per_night", "has_ac", "has_refrigerator")
 VALUES (2, 'Room 101', 2, 70.0, TRUE, TRUE),
@@ -18,7 +18,6 @@ VALUES (1, 1, 2, '2023-09-01', '2023-09-04'),
        (1, 3, 2, '2023-09-17', '2023-09-20');
        (4, 4, 2, '2023-09-04', '2023-09-08'),
        (6, 2, 3, '2023-09-10', '2023-09-13'),
-       (4, 3, 2, '2023-09-20', '2023-09-25');
 
 INSERT INTO "reviews" ("reservation_id", "rating", "review_text", "review_date")
 VALUES (1, 5, 'Great experience!', '2023-09-06'),
@@ -31,7 +30,6 @@ VALUES ('2023-09-10', 350.0, 'success', 1),
        ('2023-09-20', 150.0, 'success', 3);
        ('2023-09-04', 240.0, 'success', 4),
        ('2023-09-10', 280.0, 'success', 5),
-       ('2023-09-20', 250.0, 'success', 6);
 
 INSERT INTO "hostReviews" ("reservation_id", "guest_id", "host_id", "review_text", "review_date", "rating")
 VALUES (1, 1, 2, 'Good host!', '2023-09-07', 5),
@@ -39,4 +37,3 @@ VALUES (1, 1, 2, 'Good host!', '2023-09-07', 5),
        (3, 1, 2, 'Nice host!', '2023-09-27', 4);
        (4, 4, 5, 'Good host!', '2023-09-27', 4),
        (5, 6, 5, 'Host could improve.', '2023-09-27', 4),
-       (6, 4, 5, 'Nice host!', '2023-09-27', 5);

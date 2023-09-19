@@ -1,17 +1,12 @@
-SELECT "username", "user_id"
-FROM "users"
-WHERE "user_id" = (
-  SELECT "host_id"
-  FROM "rooms"
-  WHERE "room_id" IN (
-    SELECT "room_id"
-    FROM "reservations"
-    WHERE "reservation_id" IN (
-      SELECT "reservation_id"
-      FROM "hostReviews"
-      GROUP BY "reservation_id"
-      ORDER BY AVG("rating") DESC
-      LIMIT 1
-    )
-  )
+SELECT u.username, u.user_id
+FROM users u
+JOIN rooms r ON u.user_id = r.host_id
+JOIN reservations res ON r.room_id = res.room_id
+WHERE res.reservation_id IN (
+    SELECT hr.reservation_id
+    FROM hostReviews hr
+    GROUP BY hr.reservation_id
+    ORDER BY AVG(hr.rating) DESC
+    LIMIT 1
 );
+
